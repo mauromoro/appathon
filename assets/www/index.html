@@ -1,42 +1,250 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+	    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+		<meta name="viewport" id="viewport" content="widht=device-width, height=device-height, initial-scale=1.0, maximun-scale=1.0, user-scalable=no"/>
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/phonegap-nfc-0.2.0.js"></script>
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
+		<script type="text/javascript" charset="utf-8" src="js/jquery-2.1.1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.4.2.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		  var img_black = true;
+		  // wait for device API libraries to load
+		  function onLoad(){
+		    document.addEventListener("deviceready",onDeviceReady,false);
+		  }
+		  // the event is fired when Cordova is fully loaded
+		  function onDeviceReady(){
+		    navigator.notification.alert("PhoneGap is ready!");
+			//
+			element = document.getElementById("appInfo");
+			element.innerHTML = "PhoneGap: <strong>" + device.cordova + "</strong><br>" + 
+			"Platform: <strong>" + device.platform + "</strong> Version: <strong>" + device.version +"</strong><br>" + 
+			"Device: <strong>" + device.model + "</strong> UUID: <strong>" + device.uuid +"</strong><br>" +
+			"Name: <strong>" + device.name + "</strong>";
+			//
+			document.addEventListener("pause", onPause, false);
+			document.addEventListener("resume", onResume, false);
+			document.addEventListener("online", onOnline, false);
+			document.addEventListener("offline", onOffline, false);
+			document.addEventListener("backbutton", onBackbutton, false);
+			document.addEventListener("menubutton", onMenuButton, false);
+			//
+			nfc.addNdefListener('onNfc', onNfcSuccess, onNfcFailure);
+			//
+			
+			var accOptions = {frequency: 1000};
+			var compassOptions = {frequency: 500};
+			// geolocation API
+			var LocOptions = {
+			  enableHighAccuracy: true,
+			  //frequency: 5000,
+			  //maximunAge: 5000,
+			  timeout: 3000
+			};
+			
+			
+			//
+			//accWatchID = navigator.accelerometer.watchAcceleration(onAccSuccess, onAccFailure, accOptions);
+			//compassWatchID = navigator.compass.watchHeading(compassSuccess,compassFailure, compasdOptions);
+			//navigator.accelerometer.clearWatch(accWatchID);
+		  }
+		  // handle the online event
+		  function onOnline() {
+		    navigator.notification.alert("onOnLine");
+		  }
+		  // handle the pause event
+		  function onPause() {
+		    
+			document.removeEventListener("pause", onPause, false);
+			document.removeEventListener("resume", onResume, false);
+			document.removeEventListener("offline", onOffLine, false);
+			document.removeEventListener("backbutton", onBackButton, false);
+			document.removeEventListener("menubutton", onMenuButton, false);
+			
+			navigator.notification.alert("onPause");
+		  }
+		  // handle the resume event
+		  function onResume() {
+		    document.addEventListener("pause", onPause, false);
+			document.addEventListener("resume", onResume, false);
+			document.addEventListener("online", onOnline, false);
+			document.addEventListener("offline", onOffline, false);
+			document.addEventListener("backbutton", onBackbutton, false);
+			document.addEventListener("menubutton", onMenuButton, false);
+		  
+		    navigator.notification.alert("onResume");
+		  }
+		  function onOffline() {
+		    navigator.notification.alert("onOffLine");
+		  }
+		  function onBackbutton() {
+			navigator.notification.alert("onBackbutton");
+		  }
+		  function onMenuButton() {
+		    navigator.notification.alert("onMenuButton");
+		  }
+		  //
+		  function getAcc(){
+		    
+			navigator.accelerometer.getCurrentAcceleration(onAccSuccess, onAccFailure);
+			navigator.notification.alert("onAccelerometer");
+		  }
+		  function onAccSuccess(accel) {
+		    acc = document.getElementById("accInfo");
+		    acc.innerHTML = "<b>X</b>= " + accel.x + "<br><b>Y</b>= " + accel.y + 
+	  	    "<br><b>Z</b>= " + accel.z;
+			
+			/*
+			$("accInfo") = "<b>X</b>= " + accel.x + "<br><b>Y</b>= " + accel.y + 
+	  	    "<br><b>Z</b>= " + accel.z;
+			*/
+			
+			/*
+			i = document.getElementById("img");
+			if (img_black) {
+			  document.getElementById("img").src = "img/images.jpg";
+			  img_black = false;
+			} else {
+			  document.getElementById("img").src = "img/logo.png";
+			  img_black = true;
+			}
+			*/
+			navigator.notification.alert("onAccSuccess");
+		  }
+		  function onAccFailure() {
+		    navigator.notification.alert("onAccFailure");
+		  }
+		  function compassSuccess() {
+		    
+		  }
+		  function compassFailure() {
+		  }
+		  function getLocation(){
+		    
+		    navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+			navigator.notification.alert("onGeolocation");
+		  }
+		  function onGeolocationSuccess(loc){
+		    
+		    var d = new Date(loc.timestamp);
+			lc = document.getElementById("locationInfo");
+			lc.innerHTML = "<b>Current Location</b><hr />" +
+			"<b>Latitude</b>: " + loc.coords.latitude +
+			"<br /><b>Longitude</b>: " + loc.coords.longitude +
+			"<br /><b>Altitude</b>: " + loc.coords.altitude +
+			"<br /><b>Accuracy</b>: " + loc.coords.accuracy +
+			"<br /><b>Altitude Accuracy</b>: " + loc.coords.altitudeAccuracy +
+			"<br /><b>Heading</b>: " + loc.coords.heading +
+			"<br /><b>Speed</b>: " + loc.coords.speed +
+			"<br /><b>Timestamp</b>: " + d.toLocaleString();
+			
+			navigator.notification.alert("onLocationSuccess");
+		  }
+		  function onGeolocationError(e){
+		    var msgText = "Geolocation Error: #" + e.code + "\n" + e.message;
+		    navigator.notification.alert(msgText);
+		  }
+		  /*
+		  $("flip-checkbox-1").on("flipswitchcreate", function(){
+			  alert("flipswitch");
+		  });
+		  */
+		</script>
     </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="js/cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+    <body onload="onLoad()">
+	  <div data-role="page" id="page1">
+		<!--
+		<div data-role="panel" id="mypanel">
+		  <!-- <p>leftPanel</p> 
+		</div><!-- /panel -->
+		
+		<div data-role="header" data-position="fixed">
+          <h1>Phone<em>Gap</em></h1>
+		  <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+		  <a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
+		  
+		  <!--
+		  <div data-role="navbar">
+			<ul>
+			  <li><a href="#">one</a></li>
+			  <li><a href="#">two</a></li>
+			  <li><a href="#">three</a></li>
+			</ul>
+		  </div>< -->
+		</div>
+		<div role="main" class="ui_content">
+		  <img id="img" src="img/logo.png"/>
+          <p>This is a simple PhoneGap application</p>
+		  <p id="appInfo">Waiting for PhoneGap initialization to complete.</p>
+		  
+			<input type="button" value="Refresh Acceletometer" onclick="getAcc();">
+			<hr />
+			<p id="accInfo">Accelerometer...</p>
+		  
+		  
+			<input type="button" value="Refresh Location" onclick="getLocation();">
+			<hr />
+			<p id="locationInfo">Location Info...</p>
+		  
+		  <form>
+			<label for="flip-checkbox-1">Location</label>
+			<input type="checkbox" data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1">
+		  </form>
+		  
+		  <p>View internal page called <a href="#page2">Page 2</a></p>
+		</div>
+		<div data-role="footer" data-position="fixed">
+		  <p>footer</p>
+		</div>
+		
+		<!-- panel -->
+		<div data-role="panel" id="nav-panel" data-position="left" data-display="push" data-position-fixed="true">
+		  <ul data-role="listview">
+			<li data-icon="delete">
+			  <a href="#" data-rel="close">Close menu</a>
+			</li>
+			<li>
+			  <a href="#page1">Feature 1</a>
+			</li>
+		  </ul>
+		</div>
+		<!-- /panel -->
+		  
+		<!-- panel -->
+		<div data-role="panel" id="add" data-position="right" data-display="overlay" data-position-fixed="true">
+		  <form class="userform">
+			<h2>Login</h2>
+			<label for="name">Username:</label>
+			<input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+			<label for="password">Password:</label>
+			<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+			<div class="ui-grid-a">
+			  <div class="ui-block-a">
+				<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Close</a>
+			  </div>
+			  <div class="ui-block-b">
+				<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a>
+			  </div>
+			</div>
+		  </form>
+		</div>
+		<!-- /panel -->
+		
+	  </div><!-- page -->
+	  <div data-role="page" id="page2">
+		<!--
+		<div data-role="panel" id="panel1" data-position="left" data-display="push" data-position-fixed="true">
+		<p>leftPanel</p>
+		</div><!-- /panel -->
+		<div data-role="header">
+		</div>
+		<div role="main" class="ui_content">
+		  <p><a href="#page1">back to page 1</a></p>
+		</div>
+		<div data-role="footer">
+		</div>
+	  </div>
+	</body>
 </html>

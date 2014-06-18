@@ -151,6 +151,11 @@
 			  alert("flipswitch");
 		  });
 		  */
+		  
+		  function exitApp(){
+		    navigator.app.exitApp();
+		  }
+		  
 		</script>
     </head>
     <body onload="onLoad()">
@@ -194,6 +199,8 @@
 		  </form>
 		  
 		  <p>View internal page called <a href="#page2">Page 2</a></p>
+		  
+		  <input type="button" value="Exit" onclick="navigator.app.exitApp();">
 		</div>
 		<div data-role="footer" data-position="fixed">
 		  <p>footer</p>

@@ -261,34 +261,33 @@
 	</head>
 	<body onload="onLoad()">
 
-		<!-- page -->
+		<!-- page1 -->
 		<div data-role="page" id="page1">
 
 			<div data-role="header" data-position="fixed">
-				<h1>Panoramica</h1>
+				<!-- <h1>Panoramica</h1> -->
+			    <img id="unicredit" style="position:relative; top:50%; left:35%" src="img/LogoUnicredit-3.png"/><br>
 				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 				<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 			</div>
 
 			<div role="main" class="ui_content">
-
-			  <div>
-			    <img id="unicredit" style="position:relative; top:50%; left:35%" src="img/LogoUnicredit-3.png"/>
-			  </div>
+              <br>
+			  
 				
 			  <div id="userdiv" data-role="collapsible" data-collapsed="false" data-iconpos="right">
 				<h4 id="user">Utente</h4>
-				<p> I'm the collapside content. By default I'm closed, but youcan click the header to open me.</p>
+				<p><h3> Marciarello Bacciarelli</h3></p>
 			  </div>
 			  
 			  <div id="accountdiv" data-role="collapsible" data-collapsed="false" data-iconpos="right">
 				<h4 id="account">Conto</h4>
-				<p> I'm the collapside content. By default I'm closed, but youcan click the header to open me.</p>
+				<p><h3>c/c # 2253691</h3></p>
 			  </div>
 			  
-			  <div id="carddiv" data-role="collapsible" data-collapsed="false" data-iconpos="right">
-				<h4 id="cards">Carte</h4>
-				<img id="unicredit" src="img/LogoUnicredit-3.png"/>
+			  <div id="carddiv" style="background:#e74011" data-role="collapsible" data-collapsed="false" data-iconpos="right">
+			    <h4 id="cards" style="color:#e74011" >Carte</h4>
+				<img id="carta" style="width:50%; heitgh:50%" src="img/photo.jpg"/>
 				<p> I'm the collapside content. By default I'm closed, but youcan click the header to open me.</p>
 			  </div>
 			  
@@ -304,22 +303,22 @@
 			</div>
 
 			<!-- panel -->
-			<div data-role="panel" id="nav-panel" data-position="left" data-display="push" data-position-fixed="true">
+			<div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-position-fixed="true">
 				<ul data-role="listview">
 					<li data-icon="delete">
-						<a href="#" data-rel="close">Close menu</a>
+						<a href="#" data-ajax="false" data-rel="close">Close menu</a>
 					</li>
 					<li>
-						<a href="">Panoramica</a>
+						<a href="#" data-ajax="false" rel="external" >Panoramica</a>
 					</li>
 					<li>
-						<a href="#page2">WishList</a>
+						<a href="#page2" data-ajax="false" rel="external">WishList</a>
 					</li>
 					<li>
-						<a href="#page3">Moneta Elettronica</a>
+						<a href="#page3" data-ajax="false" rel="external">Moneta Elettronica</a>
 					</li>
 					<li>
-						<a href="#page4">Notifiche</a>
+						<a href="#page4" data-ajax="false" rel="external">Notifiche</a>
 					</li>						
 				</ul>
 			</div>
@@ -346,19 +345,22 @@
 	<!-- /panel -->
 
 </div>
-<!-- /page -->
+<!-- /page1 -->
 
 <!-- page2 -->
 <div data-role="page" id="page2">
 	<div data-role="header" data-position="fixed">
-		<h1>WishList</h1>
-		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+		<!--<h1>WishList</h1>-->
+	  
+		<img id="unicredit" style="position:relative; top:50%; left:35%" src="img/LogoUnicredit-3.png"/>
+	  
+		<a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Menu</a>
 		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 	</div>
 
 	<div role="main" class="ui_content">
-     <div id="grafico" style="width: 100%; height: 400px; border: double;">
-          Qui ci sarà il grafico completo dei valori
+     <div id="grafico">
+          <img style="width:50%; heigth:50%" src="img/0-1.png"/>
      </div>
 
 		<!-- Accordeon per la visualizzazione dei dettagli-->
@@ -438,29 +440,29 @@
 	  <p style="text-align:center">Appathon 2014</p>
 	</div>
 
-	<!-- panel -->
-	<div data-role="panel" id="nav-panel" data-position="left" data-display="push" data-position-fixed="true">
+	<!-- panel 
+	<div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-position-fixed="true">
 		<ul data-role="listview">
 			<li data-icon="delete">
 				<a href="#" data-rel="close">Close menu</a>
 			</li>
 			<li>
-				<a href="#page1">Panoramica</a>
+				<a href="#page1" data-ajax="false" rel="external">Panoramica</a>
 			</li>
 			<li>
-				<a href="">WishList</a>
+				<a href="#" data-ajax="false" >WishList</a>
 			</li>
 			<li>
-				<a href="#page3">Moneta Elettronica</a>
+				<a href="#page3" data-ajax="false" rel="external">Moneta Elettronica</a>
 			</li>
 			<li>
-				<a href="#page4">Notifiche</a>
+				<a href="#page4" data-ajax="false" rel="external">Notifiche</a>
 			</li>				
 		</ul>
 	</div>
 	<!-- /panel -->
 
-	<!-- panel -->
+	<!-- panel 
 	<div data-role="panel" id="add" data-position="right" data-display="overlay" data-position-fixed="true">
 		<form class="userform">
 			<h2>Login</h2>
@@ -486,8 +488,11 @@
 <div data-role="page" id="page3">
 
 	<div data-role="header" data-position="fixed">
-		<h1>MONETA DIGITALE</h1>
-		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+		<!--<h1>MONETA DIGITALE</h1>-->
+	  <div>
+		<img id="unicredit" style="position:relative; top:50%; left:35%" src="img/LogoUnicredit-3.png"/>
+	  </div>
+		<a href="#" data-rel="back"  data-icon="back" data-iconpos="notext">Menu</a>
 		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 	</div>
 
@@ -520,29 +525,29 @@
 		  <a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
 		  <p style="text-align:center">Appathon 2014</p>
 		</div>
-			<!-- panel -->
-			<div data-role="panel" id="nav-panel" data-position="left" data-display="push" data-position-fixed="true">
+			<!-- panel 
+			<div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-position-fixed="true">
 				<ul data-role="listview">
 					<li data-icon="delete">
 						<a href="#" data-rel="close">Close menu</a>
 					</li>
 					<li>
-						<a href="#page1">Panoramica</a>
+						<a href="#page1" data-ajax="false" rel="external">Panoramica</a>
 					</li>
 					<li>
-						<a href="#page2">WishList</a>
+						<a href="#page2" data-ajax="false" rel="external">WishList</a>
 					</li>
 					<li>
-						<a href="">Moneta Elettronica</a>
+						<a href="#" data-ajax="false" >Moneta Elettronica</a>
 					</li>
 					<li>
-						<a href="#page4">Notifiche</a>
+						<a href="#page4" data-ajax="false" rel="external">Notifiche</a>
 					</li>						
 				</ul>
 			</div>
 	<!-- /panel -->
 
-	<!-- panel -->
+	<!-- panel 
 	<div data-role="panel" id="add" data-position="right" data-display="overlay" data-position-fixed="true">
 		<form class="userform">
 			<h2>Login</h2>
@@ -564,12 +569,12 @@
 </div>
 <!-- /page3 -->
 
-<!-- page3 -->
+<!-- page4 -->
 <div data-role="page" id="page4">
 
 	<div data-role="header" data-position="fixed">
 		<h1>NOTIFICHE</h1>
-		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+		<a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Menu</a>
 		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 	</div>
 
@@ -590,29 +595,29 @@
 	  <a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
 	  <p style="text-align:center">Appathon 2014</p>
 	</div>
-			<!-- panel -->
-			<div data-role="panel" id="nav-panel" data-position="left" data-display="push" data-position-fixed="true">
+			<!-- panel 
+			<div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-position-fixed="true">
 				<ul data-role="listview">
 					<li data-icon="delete">
 						<a href="#" data-rel="close">Close menu</a>
 					</li>
 					<li>
-						<a href="#page1">Panoramica</a>
+						<a href="#page1" data-ajax="false" rel="external">Panoramica</a>
 					</li>
 					<li>
-						<a href="#page2">WishList</a>
+						<a href="#page2" data-ajax="false" rel="external">WishList</a>
 					</li>
 					<li>
-						<a href="#page3">Moneta Elettronica</a>
+						<a href="#page3" data-ajax="false" rel="external">Moneta Elettronica</a>
 					</li>
 					<li>
-						<a href="">Notifiche</a>
+						<a href="#" data-ajax="false" >Notifiche</a>
 					</li>					
 				</ul>
 			</div>
 	<!-- /panel -->
 
-	<!-- panel -->
+	<!-- panel 
 	<div data-role="panel" id="add" data-position="right" data-display="overlay" data-position-fixed="true">
 		<form class="userform">
 			<h2>Login</h2>
@@ -632,7 +637,7 @@
 	</div>
 	<!-- /panel -->
 </div>
-<!-- /page3 -->
+<!-- /page4 -->
 
 </body>
 </html>

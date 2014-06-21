@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" id="viewport" content="widht=device-width, height=device-height, initial-scale=1.0, maximun-scale=1.0, user-scalable=no"/>
+	<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/phonegap-nfc-0.2.0.js"></script>
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
+	<script type="text/javascript" charset="utf-8" src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.4.2.js"></script>
+    <script type="text/javascript" charset="utf-8">
+	  
+     /*
+	 qui javascript
+	 */
+	 
+    </script>
+  </head>
+  <body onload="onLoad()">
+	
+	<div data-role="page" id="page1">
+
+	  <div data-role="header" data-position="fixed">
+		<h1>UniTeam</h1>
+		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
+	  </div>
+
+	  <div role="main" class="ui_content">
+
+		<!-- <img id="unucredit" src="img/unicredit-banca.jpg"/> -->
+
+		<!--
+		<p>This is a simple PhoneGap application</p>
+		<p id="appInfo">Waiting for PhoneGap initialization to complete.</p>
+		-->
+
+		<!--
+		<input type="button" value="Refresh Location" onclick="getLocation();">
+		<hr />
+		<p id="locationInfo">Location Info...</p>
+		-->
+
+	  </div>
+
+	  <div data-role="footer" data-position="fixed">
+		<a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
+		<p style="text-align:center">Appathon 2014</p>
+	  </div>
+
+	  <!-- panel -->
+	  <div data-role="panel" id="nav-panel" data-position="left" data-display="push" data-position-fixed="true">
+		<ul data-role="listview">
+		  <li data-icon="delete">
+			<a href="#" data-rel="close">Close menu</a>
+		  </li>
+		  <li>
+			<a href="whishlist.html">Page 2</a>
+		  </li>
+		  <li>
+			<a href="bitcoin.html">Page 3</a>
+		  </li>
+		</ul>
+	  </div>
+	  <!-- /panel -->
+
+	  <!-- panel -->
+	  <div data-role="panel" id="add" data-position="right" data-display="overlay" data-position-fixed="true">
+		<form class="userform">
+		  <h2>Login</h2>
+		  <label for="name">Username:</label>
+		  <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+		  <label for="password">Password:</label>
+		  <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+		  <div class="ui-grid-a">
+			<div class="ui-block-a">
+			  <a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Close</a>
+			</div>
+			<div class="ui-block-b">
+			  <a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a>
+			</div>
+		  </div>
+		</form>
+		<hr>
+		<img src="img/phonegap.jpg">
+
+		<div class="ui-field-contain" class="ui-flipswitch" vertical-align="right">
+		  <label for="flip-checkbox-0">Dev</label>
+		  <input type="checkbox" data-role="flipswitch" name="flip-checkbox-0" id="flip-checkbox-0" vertical-align="right" onchange="getDev();">
+		  <br><p id="appInfo"></p>
+		</div>
+
+
+		<div class="ui-field-contain">
+		  <label for="flip-checkbox-1">Acc</label>
+		  <input type="checkbox" data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1" onchange="getAcc();">
+		  <br><p id="accInfo"></p>
+		</div>
+
+		<div class="ui-field-contain">
+		  <label for="flip-checkbox-2">Loc</label>
+		  <input type="checkbox" data-role="flipswitch" name="flip-checkbox-2" id="flip-checkbox-2" onchange="getLocation();">
+		  <p id="locationInfo"></p>
+		</div>
+
+		<div class="ui-field-contain">
+		  <label for="flip-checkbox-3">Com</label>
+		  <input type="checkbox" data-role="flipswitch" name="flip-checkbox-3" id="flip-checkbox-2" onchange="getCompass();">
+		  <p id="compass"></p>
+		</div>
+
+	  </div>
+	  <!-- /panel -->
+
+	</div>
+	<!-- /page -->
+
+	<!-- page2 -->
+	<div data-role="page" id="page2">
+
+	  <div data-role="header">
+	  </div>
+
+	  <div role="main" class="ui_content">
+		<p><a href="#page1">back to page 1</a></p>
+	  </div>
+
+	  <div data-role="footer">
+	  </div>
+
+	</div>
+	<!-- /page2 -->
+
+	<!-- page3 -->
+	<div data-role="page" id="page3">
+
+	  <div data-role="header">
+	  </div>
+
+	  <div role="main" class="ui_content">
+		<p><a href="#page1">back to page 1</a></p>
+	  </div>
+
+	  <div data-role="footer">
+	  </div>
+
+	</div>
+	<!-- /page3 -->
+
+  </body>
+</html>

@@ -24,10 +24,13 @@
 			  maximunAge: 1000,
 			  timeout: 3000
 			};
+		  
 		  var com;
 		  var comOn = false;
 		  var comWatchID;
 		  var compassOptions = {frequency: 500};
+		  var username = "";
+		  
 		  // wait for device API libraries to load
 		  function onLoad(){
 		    document.addEventListener("deviceready",onDeviceReady,false);
@@ -50,6 +53,9 @@
 			//
 			nfc.addNdefListener('onNfc', onNfcSuccess, onNfcFailure);
 			//
+			if (username != ""){
+			  $.mobile.navigate("#add");
+			}
 		  }
 		  // handle the online event
 		  function onOnline() {
@@ -194,6 +200,18 @@
 		    navigator.app.exitApp();
 		  }
 		  
+		  function login(){
+		     u = document.getElementById("name");
+			 u1 = document.getElementById("user");
+			 username = u.value;
+			 u1.innerHTML = username;
+			 
+			 cc = document.getElementById("cc");
+			 cc.innerHTML = "<br>C/C#1234567<hr>";
+			 
+			 
+		  }
+		  
 		</script>
     </head>
     <body onload="onLoad()">
@@ -209,10 +227,14 @@
 		
 		<div role="main" class="ui_content">
 		  
-		  <!-- <img id="unucredit" src="img/unicredit-banca.jpg"/> -->
-			
+		  <!-- <img id="unucredit" src="img/LogoUnicredit.png"/> -->
+		  <p id="user"></p>
+		  <p id="cc"></p>
+		  <p id="carte"></p>
+		  <p id="investimenti"></p>
+		  
 		  <!--
-          <p>This is a simple PhoneGap application</p>
+          <p This is a simple PhoneGap application</p>
 		  <p id="appInfo">Waiting for PhoneGap initialization to complete.</p>
 		  -->
 		
@@ -258,7 +280,7 @@
 				<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Close</a>
 			  </div>
 			  <div class="ui-block-b">
-				<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a>
+				<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="login();">Save</a>
 			  </div>
 			</div>
 		  </form>

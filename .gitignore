@@ -2,3 +2,8 @@
 /gen
 /obj
 /libs/*/*.so
+.DS_Store
+src/.DS_Store
+src/net/.DS_Store
+src/net/embeddware/.DS_Store
+.gitignore

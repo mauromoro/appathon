@@ -232,6 +232,19 @@
 		  	$('.coupon-box').toggleClass('hide');
 		  })
 
+		  $(document).on('click', '.nfc-box-submit', function(){
+		  	$('.feedback-money').removeClass('hide');
+		  	$('.feedback-text').text('Avvicina il device');
+		  	setTimeout(function() {
+		  		$('.feedback-text').text('Toccato!');
+		  		setTimeout(function() {
+		  			$('.feedback-text').text('Pagamento effettuato');
+			  		setTimeout(function() {
+			  			$('.feedback-money').addClass('hide');
+						}, 1000);		  			
+					}, 1000);
+				}, 2000);
+		  })
 		</script>
 	</head>
 	<body onload="onLoad()">
@@ -240,7 +253,7 @@
 		<div data-role="page" id="page1">
 
 			<div data-role="header" data-position="fixed">
-				<h1>PAG 1</h1>
+				<h1>Panoramica</h1>
 				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 				<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 			</div>
@@ -253,18 +266,6 @@
 				<p id="carte"></p>
 				<p id="investimenti"></p>
 			</div>
-		  <!--
-          <p This is a simple PhoneGap application</p>
-		  <p id="appInfo">Waiting for PhoneGap initialization to complete.</p>
-		-->
-		
-		  <!--
-		  <input type="button" value="Refresh Location" onclick="getLocation();">
-		  <hr />
-		  <p id="locationInfo">Location Info...</p>
-		-->
-
-
 
 			<div data-role="footer" data-position="fixed">
 				<a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
@@ -278,14 +279,17 @@
 						<a href="#" data-rel="close">Close menu</a>
 					</li>
 					<li>
-						<a href="#">Page 1</a>
+						<a href="">Panoramica</a>
 					</li>
 					<li>
-						<a href="#page2">Page 2</a>
+						<a href="#page2">WishList</a>
 					</li>
 					<li>
-						<a href="#page3">Page 3</a>
+						<a href="#page3">Moneta Elettronica</a>
 					</li>
+					<li>
+						<a href="#page4">Notifiche</a>
+					</li>						
 				</ul>
 			</div>
 	<!-- /panel -->
@@ -316,7 +320,7 @@
 <!-- page2 -->
 <div data-role="page" id="page2">
 	<div data-role="header" data-position="fixed">
-		<h1>PAG2</h1>
+		<h1>WishList</h1>
 		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 	</div>
@@ -335,14 +339,17 @@
 				<a href="#" data-rel="close">Close menu</a>
 			</li>
 			<li>
-				<a href="#page1">Page 1</a>
+				<a href="#page1">Panoramica</a>
 			</li>
 			<li>
-				<a href="#">Page 2</a>
+				<a href="">WishList</a>
 			</li>
 			<li>
-				<a href="#page3">Page 3</a>
+				<a href="#page3">Moneta Elettronica</a>
 			</li>
+			<li>
+				<a href="#page4">Notifiche</a>
+			</li>				
 		</ul>
 	</div>
 	<!-- /panel -->
@@ -373,32 +380,33 @@
 <div data-role="page" id="page3">
 
 	<div data-role="header" data-position="fixed">
-		<h1>PAG 3</h1>
+		<h1>MONETA DIGITALE</h1>
 		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 	</div>
 
 	<div role="main" class="ui_content page-2">
-		<button class="transfer-money">TRANSFER MONEY</button>
+		<button class="transfer-money">TRASFERISCI DENARO</button>
 		<div id="page-3-box" class="main-box hide">
 			<button class="nfc-button">NFC</button>
 			<button class="ibeacon-button">iBeacon</button>
-			<button class="coupon-button">Emit Coupon</button>
-		</div>
-		<div class="nfc-box hide">
-			<input class="nfc-box-input input" type="number" placeholder="importo"></input>
-			<button class="nfc-box-submit submit">INVIA DENARO</button>
-		</div>
-		<div class="ibeacon-box hide">
-			<input class="ibeacon-box-input input" type="number" placeholder="importo"></input>
-			<button class="ibeacon-box-submit submit">INVIA DENARO</button>			
-		</div>
-		<div class="coupon-box hide">
-			<input class="coupon-box-input input" type="number" placeholder="importo"></input>
-			<button class="coupon-box-submit submit">INVIA DENARO</button>
-		</div>
-		<div>
-			
+			<button class="coupon-button">Emetti Coupon</button>
+
+			<div class="nfc-box hide">
+				<input class="nfc-box-input input" type="number" placeholder="importo"></input>
+				<button class="nfc-box-submit submit">INVIA DENARO TRAMITE NFC</button>
+			</div>
+			<div class="ibeacon-box hide">
+				<input class="ibeacon-box-input input" type="number" placeholder="importo"></input>
+				<button class="ibeacon-box-submit submit">INVIA DENARO TRAMITE IBEACON</button>			
+			</div>
+			<div class="coupon-box hide">
+				<input class="coupon-box-input input" type="number" placeholder="importo"></input>
+				<button class="coupon-box-submit submit">INVIA DENARO TRAMITE COUPON</button>
+			</div>
+			<div class="feedback-money hide">
+				<label class="feedback-text"></label>
+			</div>
 		</div>
 	</div>
 
@@ -411,14 +419,85 @@
 						<a href="#" data-rel="close">Close menu</a>
 					</li>
 					<li>
-						<a href="#page1">Page 1</a>
+						<a href="#page1">Panoramica</a>
+					</li>
+					<li>
+						<a href="#page2">WishList</a>
+					</li>
+					<li>
+						<a href="">Moneta Elettronica</a>
+					</li>
+					<li>
+						<a href="#page4">Notifiche</a>
+					</li>						
+				</ul>
+			</div>
+	<!-- /panel -->
+
+	<!-- panel -->
+	<div data-role="panel" id="add" data-position="right" data-display="overlay" data-position-fixed="true">
+		<form class="userform">
+			<h2>Login</h2>
+			<label for="name">Username:</label>
+			<input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+			<label for="password">Password:</label>
+			<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Close</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" onclick="login();">Save</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- /panel -->
+</div>
+<!-- /page3 -->
+
+<!-- page3 -->
+<div data-role="page" id="page4">
+
+	<div data-role="header" data-position="fixed">
+		<h1>NOTIFICHE</h1>
+		<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
+	</div>
+
+	<div role="main" class="ui_content page-2">
+		<div id="page-4-box" class="main-box">
+		 <ul data-role="listview">
+		 	<div class="bank-notification">Occhio al portafoglio: cerca di ridurre le spese se vuoi arrivare a fine mese :)</div>
+		 	<div class="bank-notification">Analizzando le tue spese, abbiamo trovato un offerta che potrebbe interessarti</div>
+		 	<div class="bank-notification">Bravo, ti stai attinendo al piano risparmi ;)</div>
+		 	<div class="bank-notification">Dai un' occhiata al tuo piano di risparmio, ci sono buone notizie per te.</div>
+		 	<div class="bank-notification">Sapevi che puoi trasferire denaro direttamente dall'app in modo instantaneo?</div>
+		 	<div class="bank-notification">Grazie al tuo piano risparmio, hai risparmiato finora circa 500€ in 5 mesi!</div>
+		 </ul>
+		</div>
+	</div>
+
+	<div data-role="footer">
+	</div>
+			<!-- panel -->
+			<div data-role="panel" id="nav-panel" data-position="left" data-display="push" data-position-fixed="true">
+				<ul data-role="listview">
+					<li data-icon="delete">
+						<a href="#" data-rel="close">Close menu</a>
+					</li>
+					<li>
+						<a href="#page1">Panoramica</a>
+					</li>
+					<li>
+						<a href="#page2">WishList</a>
+					</li>
+					<li>
+						<a href="#page3">Moneta Elettronica</a>
+					</li>
+					<li>
+						<a href="">Notifiche</a>
 					</li>					
-					<li>
-						<a href="#page2">Page 2</a>
-					</li>
-					<li>
-						<a href="#page3">Page 3</a>
-					</li>
 				</ul>
 			</div>
 	<!-- /panel -->
@@ -456,6 +535,27 @@
 	}
 	.transfer-money{
 		margin: 20px 0px;
+	}
+	#page-3-box{
+		padding: 20px;
+	}
+	.coupon-box, .nfc-box, .ibeacon-box{
+		padding: 40px;
+	}
+
+	.ui-panel-wrapper{
+		border: none !important;
+	}
+	.feedback-text{
+		text-align: center;
+	}
+	li{
+		text-align: center !important;
+	}
+	.bank-notification{
+		padding: 5px;
+		border-bottom: 1px solid;
+		margin: 14px 0;
 	}
 
 </style>

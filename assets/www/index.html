@@ -9,20 +9,37 @@
 		<script type="text/javascript" charset="utf-8" src="js/jquery-2.1.1.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.4.2.js"></script>
 		<script type="text/javascript" charset="utf-8">
-		  var img_black = true;
+
+		  var devOn = false;
+		  var acc;
+		  var accOn = false;
+		  var accWatchID;
+		  var locWatchID;
+		  var accOptions = {frequency: 1000};
+		  var locOn = false;
+		  var lc;
+		  var LocOptions = {
+			  enableHighAccuracy: true,
+			  //frequency: 1000,
+			  maximunAge: 1000,
+			  timeout: 3000
+			};
+		  var com;
+		  var comOn = false;
+		  var comWatchID;
+		  var compassOptions = {frequency: 500};
 		  // wait for device API libraries to load
 		  function onLoad(){
 		    document.addEventListener("deviceready",onDeviceReady,false);
 		  }
 		  // the event is fired when Cordova is fully loaded
 		  function onDeviceReady(){
-		    navigator.notification.alert("PhoneGap is ready!");
+		    //navigator.notification.alert("PhoneGap is ready!");
 			//
-			element = document.getElementById("appInfo");
-			element.innerHTML = "PhoneGap: <strong>" + device.cordova + "</strong><br>" + 
-			"Platform: <strong>" + device.platform + "</strong> Version: <strong>" + device.version +"</strong><br>" + 
-			"Device: <strong>" + device.model + "</strong> UUID: <strong>" + device.uuid +"</strong><br>" +
-			"Name: <strong>" + device.name + "</strong>";
+			dev = document.getElementById("appInfo");
+			acc = document.getElementById("accInfo");
+			lc = document.getElementById("locationInfo");
+			com = document.getElementById("compass");
 			//
 			document.addEventListener("pause", onPause, false);
 			document.addEventListener("resume", onResume, false);
@@ -33,22 +50,6 @@
 			//
 			nfc.addNdefListener('onNfc', onNfcSuccess, onNfcFailure);
 			//
-			
-			var accOptions = {frequency: 1000};
-			var compassOptions = {frequency: 500};
-			// geolocation API
-			var LocOptions = {
-			  enableHighAccuracy: true,
-			  //frequency: 5000,
-			  //maximunAge: 5000,
-			  timeout: 3000
-			};
-			
-			
-			//
-			//accWatchID = navigator.accelerometer.watchAcceleration(onAccSuccess, onAccFailure, accOptions);
-			//compassWatchID = navigator.compass.watchHeading(compassSuccess,compassFailure, compasdOptions);
-			//navigator.accelerometer.clearWatch(accWatchID);
 		  }
 		  // handle the online event
 		  function onOnline() {
@@ -84,53 +85,94 @@
 		  }
 		  function onMenuButton() {
 		    navigator.notification.alert("onMenuButton");
-		  }
-		  //
-		  function getAcc(){
-		    
-			navigator.accelerometer.getCurrentAcceleration(onAccSuccess, onAccFailure);
-			navigator.notification.alert("onAccelerometer");
-		  }
-		  function onAccSuccess(accel) {
-		    acc = document.getElementById("accInfo");
-		    acc.innerHTML = "<b>X</b>= " + accel.x + "<br><b>Y</b>= " + accel.y + 
-	  	    "<br><b>Z</b>= " + accel.z;
+			$.mobile.navigate("#page1.nav-panel");
 			
-			/*
-			$("accInfo") = "<b>X</b>= " + accel.x + "<br><b>Y</b>= " + accel.y + 
-	  	    "<br><b>Z</b>= " + accel.z;
-			*/
 			
-			/*
-			i = document.getElementById("img");
-			if (img_black) {
-			  document.getElementById("img").src = "img/images.jpg";
-			  img_black = false;
+		  }
+		  function getDev(){
+		    if (devOn){
+			  devOn = false;
+			  dev.innerHTML = "";
 			} else {
-			  document.getElementById("img").src = "img/logo.png";
-			  img_black = true;
+			  devOn = true;
+			  dev.innerHTML = "<hr>Ver: <strong>" + device.cordova + "</strong><br>" + 
+			"Platform: <strong>" + device.platform + "</strong> - <strong>" + device.version +"</strong><br>" + 
+			"Device: <strong>" + device.model + "</strong><br> UUID: <strong>" + device.uuid +"</strong><br>" +
+			"Name: <strong>" + device.name + "</strong>";
 			}
-			*/
-			navigator.notification.alert("onAccSuccess");
 		  }
+		  
+		  function getAcc(){
+		    if (accOn) {
+			  accOn = false;
+			  navigator.accelerometer.clearWatch(accWatchID);
+			  acc.innerHTML = "";
+			} else {
+			  accOn = true;
+			  accWatchID = navigator.accelerometer.watchAcceleration(onAccSuccess, onAccFailure, accOptions);
+			  //navigator.accelerometer.getCurrentAcceleration(onAccSuccess, onAccFailure);
+			}
+			//navigator.notification.alert("onAccelerometer");
+		  }
+		  
+		  function onAccSuccess(accel) {
+		    
+		    acc.innerHTML = "<hr><b>X</b>= " + accel.x + "<br><b>Y</b>= " + accel.y + 
+	  	    "<br><b>Z</b>= " + accel.z;
+			//navigator.notification.alert("onAccSuccess");
+		  }
+		  
 		  function onAccFailure() {
 		    navigator.notification.alert("onAccFailure");
 		  }
-		  function compassSuccess() {
+		  
+		  function getCompass () {
+		    if (comOn) {
+			  comOn = false;
+			  navigator.compass.clearWatch(comWatchID);
+			  com.innerHTML= "";
+			} else {
+			  comOn = true;
+			  comWatchID = navigator.compass.watchHeading(compassSuccess,compassFailure, compassOptions);
+			}
+			//navigator.notification.alert("getCompass()");
+		  }
+		  
+		  function compassSuccess(heading) {
+		    //navigator.notification.alert("compasdSuccess()");
+		    com.innerHTML = "<br><hr><b>Magnetic Heading</b>: " + heading.magneticHeading + "<br>" +
+			"<b>True Heading</b>: " + heading.trueHeading + "<br>" +
+			"<b>Heading Accuracy</b>: " + heading.headingAccuracy;
 		    
 		  }
-		  function compassFailure() {
+		  
+		  function compassFailure(compassError) {
+		    if (compassError.code == compassError.COMPASS_NOT_SUPPORTED) {
+			  com.innerHTML = "Compass not available.";
+			} else if (compassError.code == compassError.COMPASS_INTERNAL_ERR) {
+			  navigator.notification.alert("Compass internal error!");
+			} else {
+			  navigator.notification.alert("Unknown heading error!");
+			}
 		  }
+		  
 		  function getLocation(){
-		    
-		    navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
-			navigator.notification.alert("onGeolocation");
+		    if (locOn){
+			  locOn = false;
+			  navigator.geolocation.clearWatch(locWatchID);
+			  lc.innerHTML = "";
+			} else {
+			  locOn = true;
+			  locWatchID = navigator.geolocation.watchPosition(onGeolocationSuccess, onGeolocationError);
+			}
+		    //navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+			//navigator.notification.alert("onGeolocation");
 		  }
+		  
 		  function onGeolocationSuccess(loc){
-		    
 		    var d = new Date(loc.timestamp);
-			lc = document.getElementById("locationInfo");
-			lc.innerHTML = "<b>Current Location</b><hr />" +
+			
+			lc.innerHTML = "<br><hr />" +
 			"<b>Latitude</b>: " + loc.coords.latitude +
 			"<br /><b>Longitude</b>: " + loc.coords.longitude +
 			"<br /><b>Altitude</b>: " + loc.coords.altitude +
@@ -139,18 +181,14 @@
 			"<br /><b>Heading</b>: " + loc.coords.heading +
 			"<br /><b>Speed</b>: " + loc.coords.speed +
 			"<br /><b>Timestamp</b>: " + d.toLocaleString();
-			
-			navigator.notification.alert("onLocationSuccess");
+			//navigator.notification.alert("onLocationSuccess");
 		  }
+		  
 		  function onGeolocationError(e){
 		    var msgText = "Geolocation Error: #" + e.code + "\n" + e.message;
-		    navigator.notification.alert(msgText);
+			lc.innerHTML = msgText;
+		    //navigator.notification.alert(msgText);
 		  }
-		  /*
-		  $("flip-checkbox-1").on("flipswitchcreate", function(){
-			  alert("flipswitch");
-		  });
-		  */
 		  
 		  function exitApp(){
 		    navigator.app.exitApp();
@@ -159,49 +197,33 @@
 		</script>
     </head>
     <body onload="onLoad()">
+	  
+	  <!-- page -->
 	  <div data-role="page" id="page1">
-		<!--
-		<div data-role="panel" id="mypanel">
-		  <!-- <p>leftPanel</p> 
-		</div><!-- /panel -->
 		
 		<div data-role="header" data-position="fixed">
-          <h1>Uniteam</h1>
+          <h1>UniTeam</h1>
 		  <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 		  <a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
-		  
-		  <!--
-		  <div data-role="navbar">
-			<ul>
-			  <li><a href="#">one</a></li>
-			  <li><a href="#">two</a></li>
-			  <li><a href="#">three</a></li>
-			</ul>
-		  </div>< -->
 		</div>
+		
 		<div role="main" class="ui_content">
-		  <img id="img" src="img/logo.png"/>
+		  
+		  <!-- <img id="unucredit" src="img/unicredit-banca.jpg"/> -->
+			
+		  <!--
           <p>This is a simple PhoneGap application</p>
 		  <p id="appInfo">Waiting for PhoneGap initialization to complete.</p>
-		  
-			<input type="button" value="Refresh Acceletometer" onclick="getAcc();">
-			<hr />
-			<p id="accInfo">Accelerometer...</p>
-		  
-		  
-			<input type="button" value="Refresh Location" onclick="getLocation();">
-			<hr />
-			<p id="locationInfo">Location Info...</p>
-		  
-		  <form>
-			<label for="flip-checkbox-1">Location</label>
-			<input type="checkbox" data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1" onchange="getLocation();">
-		  </form>
-		  
-		  <p>View internal page called <a href="#page2">Page 2</a></p>
-		  
+		  -->
+		
+		  <!--
+		  <input type="button" value="Refresh Location" onclick="getLocation();">
+		  <hr />
+		  <p id="locationInfo">Location Info...</p>
+		  -->
 		  
 		</div>
+		
 		<div data-role="footer" data-position="fixed">
 		  <a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
 		  <p style="text-align:center">Appathon 2014</p>
@@ -214,7 +236,10 @@
 			  <a href="#" data-rel="close">Close menu</a>
 			</li>
 			<li>
-			  <a href="#page1">Feature 1</a>
+			  <a href="#page2">Page 2</a>
+			</li>
+			<li>
+			  <a href="#page3">Page 3</a>
 			</li>
 		  </ul>
 		</div>
@@ -237,22 +262,71 @@
 			  </div>
 			</div>
 		  </form>
+		  <hr>
+		  <img src="img/phonegap.jpg">
+			
+		  <div class="ui-field-contain" class="ui-flipswitch" vertical-align="right">
+			<label for="flip-checkbox-0">Dev</label>
+			<input type="checkbox" data-role="flipswitch" name="flip-checkbox-0" id="flip-checkbox-0" vertical-align="right" onchange="getDev();">
+			<br><p id="appInfo"></p>
+		  </div>
+		  
+		  
+		  <div class="ui-field-contain">
+			<label for="flip-checkbox-1">Acc</label>
+			<input type="checkbox" data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1" onchange="getAcc();">
+			<br><p id="accInfo"></p>
+		  </div>
+		  
+		  <div class="ui-field-contain">
+			<label for="flip-checkbox-2">Loc</label>
+			<input type="checkbox" data-role="flipswitch" name="flip-checkbox-2" id="flip-checkbox-2" onchange="getLocation();">
+			<p id="locationInfo"></p>
+		  </div>
+		  
+		  <div class="ui-field-contain">
+			<label for="flip-checkbox-3">Com</label>
+			<input type="checkbox" data-role="flipswitch" name="flip-checkbox-3" id="flip-checkbox-2" onchange="getCompass();">
+			<p id="compass"></p>
+		  </div>
+		  
 		</div>
 		<!-- /panel -->
 		
-	  </div><!-- page -->
+	  </div>
+	  <!-- /page -->
+		
+	  <!-- page2 -->
 	  <div data-role="page" id="page2">
-		<!--
-		<div data-role="panel" id="panel1" data-position="left" data-display="push" data-position-fixed="true">
-		<p>leftPanel</p>
-		</div><!-- /panel -->
+		
 		<div data-role="header">
 		</div>
+		
 		<div role="main" class="ui_content">
 		  <p><a href="#page1">back to page 1</a></p>
 		</div>
+		
 		<div data-role="footer">
 		</div>
+		
 	  </div>
+	  <!-- /page2 -->
+		
+	  <!-- page3 -->
+	  <div data-role="page" id="page3">
+
+		<div data-role="header">
+		</div>
+
+		<div role="main" class="ui_content">
+		  <p><a href="#page1">back to page 1</a></p>
+		</div>
+
+		<div data-role="footer">
+		</div>
+
+	  </div>
+	  <!-- /page3 -->
+	  
 	</body>
 </html>

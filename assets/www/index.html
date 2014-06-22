@@ -6,6 +6,7 @@
 	<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/phonegap-nfc-0.2.0.js"></script>
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.2.css" />
+	<link rel="stylesheet" href="css/index.css"/>
 	<script type="text/javascript" charset="utf-8" src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.4.2.js"></script>
 	<script type="text/javascript" charset="utf-8">
@@ -212,25 +213,25 @@
 		  
 		  $(document).on('click', '.transfer-money', function(){
 		  	$('#page-3-box').toggleClass('hide');
-		  })
+		  });
 
 		  $(document).on('click', '.nfc-button', function(){
 		  	$('.coupon-box').addClass('hide');
 		  	$('.ibeacon-box').addClass('hide');
 		  	$('.nfc-box').toggleClass('hide');
-		  })
+		  });
 
 		  $(document).on('click', '.ibeacon-button', function(){
 		  	$('.nfc-box').addClass('hide');
 		  	$('.coupon-box').addClass('hide');
 		  	$('.ibeacon-box').toggleClass('hide');
-		  })
+		  });
 
 		  $(document).on('click', '.coupon-button', function(){
 		  	$('.ibeacon-box').addClass('hide');
 		  	$('.nfc-box').addClass('hide');		  	
 		  	$('.coupon-box').toggleClass('hide');
-		  })
+		  });
 
 		  $(document).on('click', '.nfc-box-submit', function(){
 		  	$('.feedback-money').removeClass('hide');
@@ -244,27 +245,27 @@
 						}, 1000);		  			
 					}, 1000);
 				}, 2000);
-		  })
+		  });
 
       $(document).on('click', '#wishlist1', function () {
           $('#wishes').hide("slow");
           $('#wishlist1').hide();
           $('#wishlist2').show();
-      })
+      });
 
       $(document).on('click', '#wishlist2', function () {
           $('#wishes').show("slow");
           $('#wishlist2').hide();
           $('#wishlist1').show();
-      })
+      });
 		</script>
 	</head>
 	<body onload="onLoad()">
 
 		<!-- page1 -->
-		<div data-role="page" id="page1">
+		<div data-role="page" class="page" id="page1">
 
-			<div data-role="header" data-position="fixed">
+			<div id="header" data-role="header" data-position="fixed">
 				<!-- <h1>Panoramica</h1> -->
 			    <img id="unicredit" style="position:relative; top:50%; left:35%" src="img/LogoUnicredit-3.png"/><br>
 				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
@@ -275,20 +276,22 @@
               <br>
 			  
 				
-			  <div id="userdiv" data-role="collapsible" data-collapsed="false" data-iconpos="right">
+			  <div id="userdiv" class="collapsible" data-role="collapsible" data-collapsed="false" data-iconpos="right" background-image="img/2014_06_22_01.16.382.png">
 				<h4 id="user">Utente</h4>
-				<p><h3> Marciarello Bacciarelli</h3></p>
+				<p><h1> Marciarello Bacciarelli</h1></p>
+				<!--<img src="img/nome.png" style="width:90%; height:20%"/>-->
 			  </div>
 			  
-			  <div id="accountdiv" data-role="collapsible" data-collapsed="false" data-iconpos="right">
+			  <div id="accountdiv" class="collapsible" data-role="collapsible" data-collapsed="false" data-iconpos="right">
 				<h4 id="account">Conto</h4>
-				<p><h3>c/c # 2253691</h3></p>
+				<p><h1>c/c # 2253691</h1></p>
 			  </div>
 			  
-			  <div id="carddiv" style="background:#e74011" data-role="collapsible" data-collapsed="false" data-iconpos="right">
-			    <h4 id="cards" style="color:#e74011" >Carte</h4>
-				<img id="carta" style="width:50%; heitgh:50%" src="img/photo.jpg"/>
-				<p> I'm the collapside content. By default I'm closed, but youcan click the header to open me.</p>
+			  <div id="carddiv" class="collapsible" data-role="collapsible" data-collapsed="false" data-iconpos="right">
+			    <h4 id="cards">Carte</h4>
+				<img id="carta" style="width:50%; heitgh:50%" src="img/carta.jpg"/>
+				<table>
+				</table>
 			  </div>
 			  
 			  <div id="assetsdiv" data-role="collapsible" data-collapsed="false" data-iconpos="right">
@@ -297,7 +300,7 @@
 			  </div>
 			</div>
 
-			<div data-role="footer" data-position="fixed">
+			<div id="footer" data-role="footer" data-position="fixed">
 			  <a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
 			  <p style="text-align:center">Appathon 2014</p>
 			</div>
@@ -348,7 +351,7 @@
 <!-- /page1 -->
 
 <!-- page2 -->
-<div data-role="page" id="page2">
+<div data-role="page" class="page" id="page2">
 	<div data-role="header" data-position="fixed">
 		<!--<h1>WishList</h1>-->
 	  
@@ -360,7 +363,7 @@
 
 	<div role="main" class="ui_content">
      <div id="grafico">
-          <img style="width:50%; heigth:50%" src="img/0-1.png"/>
+          <img style="width:90%; heigth:90%" src="img/0-3.png"/>
      </div>
 
 		<!-- Accordeon per la visualizzazione dei dettagli-->
@@ -485,7 +488,7 @@
 <!-- /page2 -->
 
 <!-- page3 -->
-<div data-role="page" id="page3">
+<div data-role="page" class="page" id="page3">
 
 	<div data-role="header" data-position="fixed">
 		<!--<h1>MONETA DIGITALE</h1>-->

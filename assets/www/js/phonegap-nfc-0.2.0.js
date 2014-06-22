@@ -7,7 +7,7 @@ PhoneGap.addConstructor(
                 console.log("Initialized the NfcPlugin");
             },
             function (reason) {
-                alert("Failed to initialize the NfcPlugin: " + reason);
+                //alert("Failed to initialize the NfcPlugin: " + reason);
             },
             "NfcPlugin", "init", []
         )

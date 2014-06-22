@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -60,7 +60,7 @@
 		}
 		  // handle the online event
 		  function onOnline() {
-		  	navigator.notification.alert("onOnLine");
+		  	//navigator.notification.alert("onOnLine");
 		  }
 		  // handle the pause event
 		  function onPause() {
@@ -71,7 +71,7 @@
 		  	document.removeEventListener("backbutton", onBackButton, false);
 		  	document.removeEventListener("menubutton", onMenuButton, false);
 
-		  	navigator.notification.alert("onPause");
+		  	//navigator.notification.alert("onPause");
 		  }
 		  // handle the resume event
 		  function onResume() {
@@ -82,16 +82,16 @@
 		  	document.addEventListener("backbutton", onBackbutton, false);
 		  	document.addEventListener("menubutton", onMenuButton, false);
 
-		  	navigator.notification.alert("onResume");
+		  	//navigator.notification.alert("onResume");
 		  }
 		  function onOffline() {
-		  	navigator.notification.alert("onOffLine");
+		  	//navigator.notification.alert("onOffLine");
 		  }
 		  function onBackbutton() {
-		  	navigator.notification.alert("onBackbutton");
+		  	//navigator.notification.alert("onBackbutton");
 		  }
 		  function onMenuButton() {
-		  	navigator.notification.alert("onMenuButton");
+		  	//navigator.notification.alert("onMenuButton");
 		  	$.mobile.navigate("#page1.nav-panel");
 
 
@@ -130,7 +130,7 @@
 		}
 
 		function onAccFailure() {
-			navigator.notification.alert("onAccFailure");
+			//navigator.notification.alert("onAccFailure");
 		}
 
 		function getCompass () {
@@ -278,31 +278,44 @@
 				
 			  <div id="userdiv" class="collapsible" data-role="collapsible" data-collapsed="false" data-iconpos="right" background-image="img/2014_06_22_01.16.382.png">
 				<h4 id="user">Utente</h4>
-				<p><h1> Marciarello Bacciarelli</h1></p>
+				<p><h1> Mario Rossi</h1></p>
 				<!--<img src="img/nome.png" style="width:90%; height:20%"/>-->
 			  </div>
 			  
 			  <div id="accountdiv" class="collapsible" data-role="collapsible" data-collapsed="false" data-iconpos="right">
 				<h4 id="account">Conto</h4>
-				<p><h1>c/c # 2253691</h1></p>
+				<div class="ui-grid-a">
+				  <div class="ui-block-a">
+				    <h1>c/c # 2253691</h1>
+				  </div>
+				  <div>
+					<h1>€1.548.37</h1>
+				  </div>
+				</div>
 			  </div>
 			  
 			  <div id="carddiv" class="collapsible" data-role="collapsible" data-collapsed="false" data-iconpos="right">
 			    <h4 id="cards">Carte</h4>
-				<img id="carta" style="width:50%; heitgh:50%" src="img/carta.jpg"/>
-				<table>
-				</table>
+				<div class="ui-grid-a">
+				  <div class="ui-block-a">
+				    <img id="carta" style="width:90%; heitgh:90%" src="img/photo.png"/>
+				  </div>
+				  <div class="ui-block-b">
+				    <img id="battery" style="width:90%; heitgh:60%" src="img/Battery-1.png"/>
+				  </div>
+				</div>
 			  </div>
 			  
 			  <div id="assetsdiv" data-role="collapsible" data-collapsed="false" data-iconpos="right">
 				<h4 id="assets">Investimenti</h4>
-				<p> I'm the collapside content. By default I'm closed, but youcan click the header to open me.</p>
+				<p><h1>Nessun Investimento</h1></p>
 			  </div>
 			</div>
 
 			<div id="footer" data-role="footer" data-position="fixed">
 			  <a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
-			  <p style="text-align:center">Appathon 2014</p>
+			  <!--<p style="text-align:center">Appathon 2014</p>-->
+			  <img id="appathon" style="height:5%; position:relative; left:40%" src="img/AppaThon-1.png"/>
 			</div>
 
 			<!-- panel -->
@@ -361,86 +374,189 @@
 		<a href="#add" data-icon="gear" data-iconpos="notext">Add</a>
 	</div>
 
-	<div role="main" class="ui_content">
-     <div id="grafico">
-          <img style="width:90%; heigth:90%" src="img/0-3.png"/>
-     </div>
+    <div role="main" class="ui_content">
+        <div id="grafico">
+            <img style="width:100%; height:50%" src="img/0-3.png" />
+        </div>
 
-		<!-- Accordeon per la visualizzazione dei dettagli-->
+        <!-- Accordeon per la visualizzazione dei dettagli-->
 
-    <div data-demo-html="true">
-        <div data-role="collapsible-set" data-inset="false">
-            <div data-role="collapsible">
-                <h3>Accrediti</h3>
-                <ul data-role="listview" data-inset="false">
-                    <li>Bonifico SEPA</li>
-                    <li>Bonifico SEPA</li>
-                    <li>Accredito interessi</li>
-                </ul>
+        <div data-demo-html="true" style="margin-bottom:180px; margin-left:20px;">
+            <div data-role="collapsible-set" data-inset="false">
+			  <div data-role="collapsible">
+				<h3>Legenda</h3>
+				<img style="width:80%; height:10%" src="img/1.png"/>
+			  </div>
+                <div data-role="collapsible">
+                    <h3>Accrediti</h3>
+                    <table class="tables" data-role="table" data-mode="column-toggle">
+                        <thead>
+                            <tr style="border-bottom:groove; border-bottom-color:red;">
+                                <th style="width:60%">Descrizione</th>
+                                <th style="width:20%">Data</th>
+                                <th style="width:20%">Importo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BONIFICO A VOSTRO FAVORE                          DA ASSICURAZIONI GENERALI S.P.A.</td>
+                                <td>02/06/2014</td>
+                                <td>1245,43</td>
+                            </tr>
+                            <tr>
+                                <td>BONIFICO A VOSTRO FAVORE                          BONIFICO SEPA DA:BERNARTO BELLOTTO</td>
+                                <td>15/06/2014</td>
+                                <td>500,00</td>
+                            </tr>
+                            <tr>
+                                <td>COMPETENZE DI LIQUIDAZIONE</td>
+                                <td>19/06/2014</td>
+                                <td>0,01</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div data-role="collapsible">
+                    <h3>Addebiti</h3>
+                    <table class="tables" data-role="table" data-mode="column-toggle">
+                        <thead>
+                            <tr style="border-bottom:groove; border-bottom-color:red;">
+                                <th style="width:60%">Descrizione</th>
+                                <th style="width:20%">Data</th>
+                                <th style="width:20%">Importo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PAGAMENTO BOLLETTA TELEFONICA            RID DA 45130-4513451345134513 TELECOM ITALIA S.P.A.</td>
+                                <td>04/06/2014</td>
+                                <td>143,50</td>
+                            </tr>
+                            <tr>
+                                <td>PRELIEVO BANCOMAT NS.ATM N.9174 CARTA *9174</td>
+                                <td>06/06/2014</td>
+                                <td>200,00</td>
+                            </tr>
+                            <tr>
+                                <td>PAYPAL *ABERCROMBIE      98699869001  NLD9869BNLD</td>
+                                <td>11/06/2014</td>
+                                <td>39,99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div data-role="collapsible">
+                    <h3>Risparmi WISHLIST</h3>
+                    <table class="tables" data-role="table" data-mode="column-toggle">
+                        <thead>
+                            <tr style="border-bottom:groove; border-bottom-color:red;">
+                                <th style="width:45%">Descrizione</th>
+                                <th style="width:20%">Data Obiettivo</th>
+                                <th style="width:15%">Importo Rimanente</th>
+                                <th style="width:15%">Allocato Mese</th>
+                                <th style="width:5%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Risparmio Denaro</td>
+                                <td>01/01/2019</td>
+                                <td>45450,90</td>
+                                <td>150,70</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td>Acquisto Auto</td>
+                                <td>01/07/2017</td>
+                                <td>4450,90</td>
+                                <td>350,70</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td>Risparmio Denaro</td>
+                                <td>01/07/2014</td>
+                                <td>50,90</td>
+                                <td>50,90</td>
+                                <td>X</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div data-role="collapsible">
-                <h3>Spese</h3>
-                <ul data-role="listview" data-inset="false">
-                    <li>Bolletta Telecom</li>
-                    <li>ENI Bolletta</li>
-                </ul>
-            </div>
-            <div data-role="collapsible">
-                <h3>Risparmi wishlist</h3>
-                <ul data-role="listview" data-inset="false">
-                    <li>Earth</li>
-                    <li>Jupiter</li>
-                    <li>Mars</li>
-                    <li>Mercury</li>
-                </ul>
-            </div>
+        </div>
+
+
+        <div id="inputObiettivo" data-role="popup" data-transition="slideup" style="width: 400px; height: 200px; border-radius:10px; border:solid; border-color:red;">
+            <label for="importoPrevisto" style="font-size:15px;">Importo previsto</label>
+            <input id="importoPrevisto" name="importoPrevisto" type="text" width="200" />
+            <label for="dataObiettivo" style="font-size:15px;">Data obiettivo</label>
+            <fieldset id="dataObiettivo" data-role="controlgroup" data-type="horizontal">
+                <select name="select-native-11" id="select-native-11">
+                    <option value="#">Gennaio</option>
+                    <option value="#">Febbraio</option>
+                    <option value="#">Marzo</option>
+                    <option value="#">Aprile</option>
+                    <option value="#">Maggio</option>
+                    <option value="#">Giugno</option>
+                    <option value="#">Luglio</option>
+                    <option value="#">Agosto</option>
+                    <option value="#">Settembre</option>
+                    <option value="#">Ottobre</option>
+                    <option value="#">Novembre</option>
+                    <option value="#">Dicembre</option>
+                </select>
+                <select name="select-native-12" id="select-native-12">
+                    <option value="#">2014</option>
+                    <option value="#">2015</option>
+                    <option value="#">2016</option>
+                    <option value="#">2017</option>
+                    <option value="#">2018</option>
+                    <option value="#">2019</option>
+                </select>
+
+            </fieldset>
+            <input id="confermaObiettivo" type="button" value="Conferma" />
+        </div>
+
+        <div id="selector" style="height: 150px; position:absolute; bottom: 75px;">
+            <table>
+                <tr>
+                    <td width="150px">
+                        <a href="#" id="wishlist1" style="width: 150px; "><img src="img/Wishlist.png" /></a>
+                        <a href="#" id="wishlist2" style="width: 150px; display: none;"><img src="img/Wishlist.png" /></a>
+                    </td>
+                    <td>
+                        <div id="wishes" data-transition="slide">
+                            <table>
+                                <tr>
+                                    <td class="wElementTD">
+                                        <a id="wDenaro" class="wElement" href="#inputObiettivo" data-rel="popup"><img src="img/Cash.png" /></a>
+                                    </td>
+                                    <td class="wElementTD">
+                                        <a id="wCasa" class="wElement" href="#inputObiettivo" data-rel="popup"><img src="img/Home.png" /></a>
+                                    </td>
+                                    <td class="wElementTD">
+                                        <a id="wMacchina" class="wElement" href="#inputObiettivo" data-rel="popup"><img src="img/Car.png" /></a>
+                                    </td>
+                                    <td class="wElementTD">
+                                        <a id="wViaggi" class="wElement" href="#inputObiettivo" data-rel="popup"><img src="img/Jorney.png" /></a>
+                                    </td>
+                                    <td class="wElementTD">
+                                        <a id="wIstruzione" class="wElement" href="#inputObiettivo" data-rel="popup"><img src="img/Study.png" /></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
-
-    <div id="inputObiettivo" data-role="popup" data-transition="slideup" style="width: 300px; height: 300px;">
-        <label for="importoPrevisto">Importo previsto</label>
-        <input id="importoPrevisto" name="importoPrevisto" type="text" />
-        <label for="dataObiettivo">Data obiettivo</label>
-        <input id="dataObiettivo" name="dataObiettivo" type="text" />
-        <input id="confermaObiettivo" type="button" value="Conferma" />
-    </div>
-
-    <div id="selector" style="height: 100px;">
-        <table>
-            <tr>
-                <td width="100px">
-                    <a href="#" id="wishlist1" data-role="button" style="width: 100px; ">WISHLIST</a>
-                    <a href="#" id="wishlist2" data-role="button" style="width: 100px; display: none;">WISHLIST</a>
-                </td>
-                <td>
-                    <div id="wishes" data-transition="slide">
-                        <table>
-                            <tr>
-                                <td>
-                                    <a href="#inputObiettivo" data-rel="popup" data-role="button">H</a>
-                                </td>
-                                <td>
-                                    <a href="#inputObiettivo" data-rel="popup" data-role="button">€</a>
-                                </td>
-                                <td>
-                                    <a href="#inputObiettivo" data-rel="popup" data-role="button">C</a>
-                                </td>
-                                <td>
-                                    <a href="#inputObiettivo" data-rel="popup" data-role="button">I</a>
-                                </td>
-                                </tr>
-                            </table>
-                    </div>
-            </td>
-            </tr>
-        </table>
-    </div>
-	</div>
-
 	<div data-role="footer" data-position="fixed">
 	  <a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
-	  <p style="text-align:center">Appathon 2014</p>
+	  <!--<p style="text-align:center">Appathon 2014</p>-->
+	  <img id="appathon1" style="height:5%; position:relative; left:40%" src="img/AppaThon-1.png"/>
 	</div>
 
 	<!-- panel 
@@ -500,6 +616,9 @@
 	</div>
 
 	<div role="main" class="ui_content page-2">
+	  
+	    
+	  
 		<button class="transfer-money">TRASFERISCI DENARO</button>
 		<div id="page-3-box" class="main-box hide">
 			<button class="nfc-button">NFC</button>
@@ -521,12 +640,17 @@
 			<div class="feedback-money hide">
 				<label class="feedback-text"></label>
 			</div>
+			
+		  
 		</div>
+		
+	  <img style="width:50%; heght:50%; position:relative; top:50%; left:25%" src="img/bitcoin2.png"/>
 	</div>
 
 		<div data-role="footer" data-position="fixed">
 		  <a href="#" data-icon="power" data-iconpos="notext" class="ui-btn-right" onclick="navigator.app.exitApp();"></a>
-		  <p style="text-align:center">Appathon 2014</p>
+		  <!--<p style="text-align:center">Appathon 2014</p>-->
+		  <img id="appathon2" style="height:5%; position:relative; left:40%" src="img/AppaThon-1.png"/>
 		</div>
 			<!-- panel 
 			<div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-position-fixed="true">
